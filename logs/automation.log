@@ -1,0 +1,38 @@
+18:42:41.919 [main] INFO  testCases.TC001_AccountRegistration - Finished Test
+18:42:44.720 [main] INFO  testCases.TC002_LoginTest - ***** Starting TC_002_LoginTest *****
+18:42:46.294 [main] INFO  testCases.TC002_LoginTest - ***** Finished TC_002_LoginTest *****
+18:51:27.707 [main] INFO  testCases.TC001_AccountRegistration - *******Starting TC001_Account Registration Test************
+18:51:27.912 [main] INFO  testCases.TC001_AccountRegistration - Clicked on my Account link
+18:51:28.472 [main] INFO  testCases.TC001_AccountRegistration - Clicked on Register link
+18:51:28.493 [main] INFO  testCases.TC001_AccountRegistration - Providing customer details
+18:51:30.613 [main] INFO  testCases.TC001_AccountRegistration - Validating expected message...
+18:51:30.657 [main] INFO  testCases.TC001_AccountRegistration - Finished Test
+18:51:33.206 [main] INFO  testCases.TC002_LoginTest - ***** Starting TC_002_LoginTest *****
+18:51:34.772 [main] INFO  testCases.TC002_LoginTest - ***** Finished TC_002_LoginTest *****
+18:51:49.440 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
+  C:\workspaces\automationDev\OpencartV121\master.xml
+
+18:51:52.343 [main] INFO  testCases.TC001_AccountRegistration - *******Starting TC001_Account Registration Test************
+18:51:52.501 [main] INFO  testCases.TC001_AccountRegistration - Clicked on my Account link
+18:51:52.897 [main] INFO  testCases.TC001_AccountRegistration - Clicked on Register link
+18:51:52.900 [main] INFO  testCases.TC001_AccountRegistration - Providing customer details
+18:51:54.566 [main] INFO  testCases.TC001_AccountRegistration - Validating expected message...
+18:51:54.601 [main] INFO  testCases.TC001_AccountRegistration - Finished Test
+18:51:57.168 [main] INFO  testCases.TC002_LoginTest - ***** Starting TC_002_LoginTest *****
+18:51:58.676 [main] INFO  testCases.TC002_LoginTest - ***** Finished TC_002_LoginTest *****
+19:09:42.883 [main] INFO  testCases.TC001_AccountRegistration - *******Starting TC001_Account Registration Test************
+19:09:43.086 [main] INFO  testCases.TC001_AccountRegistration - Clicked on my Account link
+19:09:43.773 [main] INFO  testCases.TC001_AccountRegistration - Clicked on Register link
+19:09:43.779 [main] INFO  testCases.TC001_AccountRegistration - Providing customer details
+19:09:46.083 [main] INFO  testCases.TC001_AccountRegistration - Validating expected message...
+19:09:46.138 [main] INFO  testCases.TC001_AccountRegistration - Finished Test
+19:09:49.201 [main] INFO  testCases.TC002_LoginTest - ***** Starting TC_002_LoginTest *****
+19:09:50.946 [main] INFO  testCases.TC002_LoginTest - ***** Finished TC_002_LoginTest *****
+19:19:57.047 [main] INFO  testCases.TC001_AccountRegistration - *******Starting TC001_Account Registration Test************
+19:19:57.198 [main] INFO  testCases.TC001_AccountRegistration - Clicked on my Account link
+19:19:58.109 [main] INFO  testCases.TC001_AccountRegistration - Clicked on Register link
+19:19:58.112 [main] INFO  testCases.TC001_AccountRegistration - Providing customer details
+19:19:59.846 [main] INFO  testCases.TC001_AccountRegistration - Validating expected message...
+19:19:59.884 [main] INFO  testCases.TC001_AccountRegistration - Finished Test
+19:20:09.185 [main] INFO  testCases.TC002_LoginTest - ***** Starting TC_002_LoginTest *****
+19:20:12.689 [main] INFO  testCases.TC002_LoginTest - ***** Finished TC_002_LoginTest *****

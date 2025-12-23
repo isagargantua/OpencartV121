@@ -1,0 +1,214 @@
+/****************************************************
+ *                    DOCKER NOTES
+ *        (For Selenium Automation Testing)
+ ****************************************************/
+
+// --------------------------------------------------
+// What is Docker?
+// --------------------------------------------------
+// Docker is a containerization platform used to run
+// applications inside isolated environments called
+// containers. It bundles OS libraries, dependencies,
+// browser binaries and configurations so tests run
+// identically across machines.
+
+// Physical Machine:
+// - One full machine per OS/app
+// - Heavy hardware and setup needed
+
+// Virtual Machine:
+// - Full OS for every VM (Windows, Linux etc.)
+// - Slow boot time, large memory usage
+
+// Docker (Containerization):
+// - Shares same OS kernel, lightweight, fast
+// - Containers start within seconds
+// - Ideal for parallel testing and CI pipelines
+
+
+/****************************************************
+ * Docker Terms
+ ****************************************************/
+
+// Docker Image:
+// - Read-only blueprint/template used to create containers
+// Example: selenium/node-chrome, ubuntu, mysql
+
+// Docker Container:
+// - Running instance of an image
+// Example: docker run ubuntu → creates container
+
+// Difference Summary:
+// - Image = template
+// - Container = instance running from image
+
+
+/****************************************************
+ * Why Docker is Better Than VM for Testing?
+ ****************************************************/
+
+// - Faster execution, lightweight
+// - Zero configuration conflicts
+// - Portable across machines and CI servers
+// - Easy scaling for 10+ browser nodes
+// - Minimal resource consumption
+// - Ideal for Selenium Grid parallel execution
+
+
+/****************************************************
+ * Docker Hub & Docker Desktop
+ ****************************************************/
+
+// Docker Hub:
+// - Online cloud repository storing official images
+// Example: docker pull selenium/hub
+
+// Docker Desktop:
+// - GUI application for managing docker containers
+// - Start/stop containers, manage logs visually
+
+
+/****************************************************
+ * Docker Basic Commands
+ ****************************************************/
+
+// docker version         → Shows installed docker version.
+// docker -v              → Short docker version.
+// docker info            → Displays docker details.
+// docker --help          → Shows command usage.
+// docker login           → Login to Docker Hub.
+
+/****************************************************
+ * Image Commands
+ ****************************************************/
+
+// docker images          → List downloaded images.
+// docker pull ubuntu     → Downloads Ubuntu image.
+// docker rmi <image id>  → Removes an image.
+
+/****************************************************
+ * Container Commands
+ ****************************************************/
+
+// docker ps                       → Running containers.
+// docker run <image>              → Creates container.
+// docker start <container id>     → Starts container.
+// docker stop <container id>      → Stops container.
+// docker rm <container id>        → Removes container.
+
+/****************************************************
+ * System Commands
+ ****************************************************/
+
+// docker stats             → Resource usage.
+// docker system df         → Disk usage.
+// docker system prune -f   → Cleanup.
+
+
+/****************************************************
+ * Manual Selenium Grid Setup Using Docker
+ ****************************************************/
+
+// 1) Pull Required Images:
+// docker pull selenium/hub
+// docker pull selenium/node-chrome
+// docker pull selenium/node-firefox
+
+// 2) Create Docker Network:
+// docker network create grid
+
+// 3) Run Hub:
+// docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub selenium/hub
+
+// Selenium Grid UI URL:
+// http://localhost:4444/ui/
+
+// 4) Run Chrome Node:
+// docker run -d --net grid 
+// -e SE_EVENT_BUS_HOST=selenium-hub 
+// -e SE_EVENT_BUS_PUBLISH_PORT=4442 
+// -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 
+// selenium/node-chrome
+
+// 5) Run Firefox Node:
+// docker run -d --net grid 
+// -e SE_EVENT_BUS_HOST=selenium-hub 
+// -e SE_EVENT_BUS_PUBLISH_PORT=4442 
+// -e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 
+// selenium/node-firefox
+
+
+/****************************************************
+ * Why Docker Compose?
+ ****************************************************/
+
+// Manual method → multiple commands
+// Compose method → one YAML file handles all
+// Easy scaling → chrome=5 containers
+// Centralized management
+// CI/CD friendly
+
+
+/****************************************************
+ * Selenium Grid with Docker-Compose
+ ****************************************************/
+
+// docker-compose.yml setup:
+//
+// version: '3'
+// services:
+//   selenium-hub:
+//     image: selenium/hub
+//     ports:
+//       - "4442-4444:4442-4444"
+//     networks:
+//       - grid
+//
+//   node-chrome:
+//     image: selenium/node-chrome
+//     environment:
+//       - SE_EVENT_BUS_HOST=selenium-hub
+//       - SE_EVENT_BUS_PUBLISH_PORT=4442
+//       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+//     networks:
+//       - grid
+//
+//   node-firefox:
+//     image: selenium/node-firefox
+//     environment:
+//       - SE_EVENT_BUS_HOST=selenium-hub
+//       - SE_EVENT_BUS_PUBLISH_PORT=4442
+//       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+//     networks:
+//       - grid
+//
+// networks:
+//   grid:
+//     driver: bridge
+
+
+/****************************************************
+ * How to Run Docker-Compose Grid
+ ****************************************************/
+
+// 1) Open cmd where YAML exists:
+// cd <project path>
+//
+// 2) Start Selenium Grid:
+// docker-compose up -d
+//
+// 3) Check Grid Console:
+// http://localhost:4444/grid/console
+//
+// 4) Scale Browser Nodes:
+// docker-compose scale node-chrome=3
+//
+// 5) Stop Grid:
+// docker-compose down
+//
+// OR stop via Docker Desktop GUI.
+
+
+/****************************************************
+ * END OF NOTES
+ ****************************************************/

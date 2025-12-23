@@ -1,0 +1,166 @@
+***************************************
+HYBRID SELENIUM FRAMEWORK - PROJECT FLOW
+***************************************
+
+1) PROJECT STRUCTURE
+---------------------
+src/test/java/
+   ├─ pageObjects          → Contains Page Object classes
+   │   ├─ BasePage.java
+   │   ├─ HomePage.java
+   │   └─ AccountRegistration.java
+   │
+   ├─ testBase            → Contains Base class for driver setup
+   │   └─ BaseClass.java
+   │
+   └─ testCases           → Contains Test Classes
+       └─ TC001_AccountRegistration.java
+
+
+2) WHAT EACH PACKAGE DOES
+-------------------------
+
+A) pageObjects package:
+-----------------------
+• Follows Page Object Model (POM) design.
+• Every webpage has its own java class.
+• Each class stores locators + actions.
+
+(i) BasePage.java:
+------------------
+• Common parent for all page classes.
+• Stores WebDriver reference.
+• Uses PageFactory to initialize elements.
+ 
+    - PageFactory.initElements(driver, this);
+
+This helps to:
+• locate elements at runtime,
+• reduce driver usage repetition.
+
+(ii) HomePage.java:
+-------------------
+• Contains locators + functions for home page.
+• Example actions:
+    - Click My Account link
+    - Click Register link
+
+Browser flow:
+Homepage → MyAccount → Register
+
+(iii) AccountRegistration.java:
+-------------------------------
+• Handles Register account page.
+• Contains:
+  - locator for First Name, Last Name, Email, Password
+  - click Newsletter
+  - click Policy checkbox
+  - click Continue button
+• getConfirmationMsg() returns success message.
+
+
+B) testBase package:
+--------------------
+(i) BaseClass.java:
+-------------------
+• Parent class for all tests.
+• Contains:
+  - WebDriver declaration
+  - @BeforeClass → driver initialization
+  - @AfterClass → driver quit
+  - URL launching
+  - Browser configuration
+  - Random test data generation methods
+
+So every test class that extends BaseClass
+automatically gets:
+  - driver
+  - randomString()
+  - randomNumber()
+  - randomAlphaNumeric()
+
+
+C) testCases package:
+---------------------
+(i) TC001_AccountRegistration.java:
+-----------------------------------
+• Main test class validating registration.
+• Uses POM classes to perform actions.
+• Flow inside test method:
+
+Step 1: HomePage object created
+        → click My Account
+        → click Register
+
+Step 2: AccountRegistration object created
+        → send First Name, Last Name, Email, Password
+        → click Policy + Continue
+
+Step 3: Get confirmation text
+
+Step 4: Assert validation:
+        Assert.assertEquals(msg, "Your Account Has Been Created!");
+
+• Therefore test verifies new user registration.
+
+
+
+3) FLOW OF THE AUTOMATION EXECUTION
+-----------------------------------
+
+(1) Test starts → extends BaseClass
+    → setup() executes first (@BeforeClass)
+    → driver created + browser opened + URL launched.
+
+(2) Test method starts:
+    → HomePage class object created with same driver
+    → POM locators initialized
+    → HomePage functions execute
+
+(3) Register page opened:
+    → AccountRegistration object created
+
+(4) Random test data passed into text fields:
+    - firstName = randomString()
+    - lastName = randomString()
+    - email = randomString() + "@gmail.com"
+    - password = randomAlphaNumeric()
+
+(5) Continue clicked
+    → browser submits the form
+
+(6) Confirmation text returned
+
+(7) Assert compares expected vs actual
+
+(8) Test finishes → tearDown() runs → browser closes.
+
+
+
+4) TECHNICAL CONCEPTS USED:
+---------------------------
+
+• POM → separates locators + logic from test
+• BaseClass → reusable setup + teardown
+• PageFactory → initializes web elements
+• RandomStringUtils → dynamic test data generation
+• TestNG → test execution + assertions
+• Inheritance → driver sharing between test classes
+• Reusability → less code duplication
+
+
+5) ADVANTAGES OF THIS FRAMEWORK
+-------------------------------
+
+• Easy maintainability
+• Test logic separated from UI locators
+• Reduced code duplication
+• Clean reporting structure
+• Easy scalability for more test cases
+• Supports multiple test classes
+• You can easily add new pages
+
+
+***************************************
+END OF FRAMEWORK EXPLANATION
+***************************************

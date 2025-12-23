@@ -1,0 +1,130 @@
+/*
+ ============================== SELENIUM GRID FULL NOTES ==============================
+
+ Selenium Grid allows execution of tests on different machines & browsers remotely.
+ It provides support for distributed execution, cross-browser testing & parallelism.
+
+ Selenium Grid supports two execution modes:
+
+ --------------------------------------------------------------------------------------
+ 1. STANDALONE MODE (Single Machine Setup)
+ --------------------------------------------------------------------------------------
+ - In Standalone mode, one Selenium Server JAR runs as Hub + Node together.
+ - Only one machine is involved.
+ - Used for learning and simple executions.
+
+ ----------------------- STANDALONE SETUP STEPS --------------------------------------
+
+ STEP 1 – DOWNLOAD THE SERVER JAR:
+ - Go to: https://www.selenium.dev/downloads/
+ - Download selenium-server.jar (example: selenium-server-4.39.0.jar)
+ - Place JAR in any folder like: C:\SeleniumGrid\
+
+ STEP 2 – RUN STANDALONE NODE:
+ - Open CMD inside the folder where JAR is stored.
+ - Run:
+        java -jar selenium-server-4.39.0.jar standalone
+
+ STEP 3 – HUB URL IDENTIFICATION:
+ - After starting, Selenium Grid prints a URL:
+        http://localhost:4444   (or system IP: http://<your-ip>:4444)
+ - This URL shows Selenium Grid server UI.
+
+ STEP 4 – USE HUB URL IN CODE:
+ - In RemoteWebDriver URL:
+        http://<ip>:4444/wd/hub
+
+ STEP 5 – MAKE REMOTE EXECUTION ACTIVE:
+ Inside config.properties:
+        execution_env = remote
+
+ STEP 6 – VIEW ACTIVE SESSIONS:
+ - Open hub URL on browser → http://localhost:4444
+
+ BENEFITS OF STANDALONE MODE:
+ - Easy setup
+ - Good for practicing Selenium Grid basics
+ - No Hub/Node configuration required
+
+ --------------------------------------------------------------------------------------
+ 2. DISTRIBUTED HUB + NODE MODE (Multiple Machine Setup)
+ --------------------------------------------------------------------------------------
+ - Distributed mode separates Hub and Nodes.
+ - Hub machine receives commands from test code.
+ - Node machines execute browsers.
+
+ WHY DISTRIBUTED MODE IS USED:
+ - Parallel test execution on multiple machines.
+ - Cross browser & cross platform combinations.
+ - Increased speed & system scalability.
+ - Ideal for enterprise automation, VM setups & CI/CD.
+
+ ----------------------- DISTRIBUTED SETUP STEPS ------------------------------------
+
+ REQUIREMENT:
+ - At least 2 machines:
+      1) Machine A → Hub
+      2) Machine B → Node
+ - Both must have Selenium server jar copied locally.
+
+ STEP 1 – DOWNLOAD SELENIUM SERVER ON ALL MACHINES:
+ - Download selenium-server.jar and place it on Hub + Node machines.
+
+ STEP 2 – START HUB MACHINE:
+ - Go to Hub machine’s JAR folder location → open CMD
+ - Run:
+        java -jar selenium-server-4.39.0.jar hub
+ - Hub is now active and will generate a hub URL:
+        http://<hub-ip>:4444
+
+ STEP 3 – START NODE MACHINE:
+ - Go to Node machine’s JAR folder location → open CMD
+ - Run command to connect node with hub:
+        java -jar selenium-server-4.39.0.jar node --hub http://<hub-ip>:4444
+ Example:
+        java -jar selenium-server-4.39.0.jar node --hub http://192.168.29.229:4444
+
+ STEP 4 – SEE CONNECTED NODES:
+ - Open hub URL in any browser:
+        http://<hub-ip>:4444
+ - Under “Sessions/Nodes” you will see:
+        • Connected node machines
+        • Running tests
+        • Browser instances
+
+ STEP 5 – REMOTEWEBDRIVER CODE CONNECTION:
+ - Use hub URL in your code:
+        new RemoteWebDriver(new URL("http://<hub-ip>:4444/wd/hub"), capabilities)
+
+ IMPORTANT NOTES ABOUT NODES:
+ - Multiple nodes can be attached:
+        Node 1 → Windows + Chrome
+        Node 2 → Mac + Safari
+        Node 3 → Linux + Firefox
+ - Hub assigns test requests to free nodes automatically.
+
+ FINAL RESULT:
+ - Tests will run in parallel on different machines.
+ - You achieve true distributed automation.
+
+ ----------------------- BENEFITS OF DISTRIBUTED MODE ------------------------
+
+ - Massive scalability for large testing teams.
+ - Faster execution via parallel runs.
+ - Supports mixed OS environments.
+ - Eliminates machine hardware limitations.
+ - Best solution for real-time cloud/VM automation.
+
+ ============================== FINAL SUMMARY ==================================
+
+ Standalone Mode:
+ - One machine behaves as both hub + node.
+ - Great for learning and practicing Selenium Grid.
+
+ Distributed Mode:
+ - Hub + multiple nodes → separate computers.
+ - Ideal for enterprise, CI/CD pipelines & multi-browser platforms.
+
+ Selenium Grid gives automation power to run your tests remotely,
+ distribute browser load & speed up execution significantly.
+*/

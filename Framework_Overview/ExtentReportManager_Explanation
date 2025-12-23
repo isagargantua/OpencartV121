@@ -1,0 +1,100 @@
+/*
+================================= ExtentReportManager Explanation =================================
+
+▶ PURPOSE:
+This class is a TestNG Listener which generates the Extent HTML report automatically
+after execution. It logs PASS/FAIL/SKIP results, attaches screenshots, opens the 
+report automatically, and can also email the execution report.
+
+----------------------------------------------------------------------------------------------------
+
+▶ HOW THE REPORT IS CREATED:
+onStart() method runs before execution and:
+ - Creates dynamic report name using timestamp
+ - Initializes ExtentSparkReporter → stores the HTML file in /reports folder
+ - Sets report theme, title, and name (DARK mode UI)
+ - Creates ExtentReports object & attaches sparkReporter
+ - Adds system information (Application, User, Module, Browser, OS, Environment)
+ - Captures TestNG Groups information
+
+----------------------------------------------------------------------------------------------------
+
+▶ PASS RESULT HANDLING:
+onTestSuccess():
+ - Creates test node inside report using class name
+ - Marks test result as PASS
+ - Assigns category based on TestNG group
+
+----------------------------------------------------------------------------------------------------
+
+▶ FAILURE HANDLING:
+onTestFailure():
+ - Marks test as FAIL along with error message
+ - Captures the failure reason (Throwable)
+ - Takes screenshot using BaseClass.captureScreen()
+ - Attaches screenshot path to the failed step in report
+
+----------------------------------------------------------------------------------------------------
+
+▶ SKIPPED RESULT HANDLING:
+onTestSkipped():
+ - Marks test as SKIPPED
+ - Adds skip reason inside report (Throwable message)
+
+----------------------------------------------------------------------------------------------------
+
+▶ REPORT FINALIZATION:
+onFinish():
+ - extent.flush() writes final report to HTML file
+ - Automatically opens the report at end of execution
+   using Desktop.getDesktop().browse()
+
+----------------------------------------------------------------------------------------------------
+
+▶ EMAIL REPORT FEATURE:
+Inside onFinish():
+ - Loads report file path as URL
+ - Configures smtp server (gmail settings)
+ - Sends report to specified email ID
+ - Attaches extent report file to email
+
+----------------------------------------------------------------------------------------------------
+
+▶ WHERE THIS LISTENER IS USED:
+Add in TestNG XML:
+<listeners>
+    <listener class-name="utilities.ExtentReportManager"/>
+</listeners>
+
+----------------------------------------------------------------------------------------------------
+
+▶ RESULT STORAGE INFO:
+ - Full HTML report → /reports folder
+ - Screenshots of failed tests → /screenshots folder
+ - Failed test re-run XML → test-output/testng-failed.xml
+
+----------------------------------------------------------------------------------------------------
+
+▶ MAJOR ADVANTAGES:
+ - Auto reporting for every test case
+ - Screenshots available for failures
+ - No manual logging required
+ - Helps debugging & failure investigation
+ - Standard reporting used in real Selenium frameworks
+
+====================================================================================================
+*/
+
+
+// -----------------------------------------------
+From CODE: Line no-64:- testContext.getCurrentXmlTest().getParameter("browser");
+// This line reads the value of the <parameter> named "browser"
+// from the currently running test inside the testng.xml file.
+//
+// Example XML:
+// <test name="DemoTest">
+//     <parameter name="browser" value="chrome"/>
+// </test>
+//
+// So calling getParameter("browser") will return → "chrome"
+// Helpful for cross-browser execution without hardcoding values.

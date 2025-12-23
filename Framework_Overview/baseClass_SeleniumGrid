@@ -1,0 +1,47 @@
+/*
+ This block of logic controls how the WebDriver instance is created based on
+ the execution environment and browser type selected by the user.
+
+ First, we check a value from the properties file named 'execution_env'.
+ If it equals "remote", it means we want to run our tests on a Selenium Grid system.
+
+ When running in remote mode, we must define two important parameters:
+ 1) Operating System
+ 2) Browser type
+ 
+ For this purpose, a DesiredCapabilities object is created. This object stores
+ required configuration about OS and browser, which will be sent to the Grid Hub.
+
+ Next, we validate the operating system value coming from user/test configuration:
+ - If OS = "windows" → platform is set to Windows 11 node.
+ - If OS = "mac"     → platform is set to Mac node.
+ - If OS value is not recognized → execution stops and prints a message.
+ This ensures Grid knows on which type of machine the browser must run.
+
+ After OS selection, browser selection occurs through a switch condition:
+ - If browser = "chrome" → capability browserName is set to Chrome.
+ - If browser = "edge"   → capability browserName is set to Microsoft Edge.
+ - If browser name does not match → execution stops and prints message.
+ This helps Selenium Grid decide which browser instance should be opened remotely.
+
+ Once OS and browser are successfully selected, the RemoteWebDriver is created.
+ We provide the Selenium Grid Hub address (IP + port) along with capability object.
+ This connects our test to a remote machine/node and runs the browser there
+ instead of our local PC.
+
+ The next part handles LOCAL execution mode.
+ If 'execution_env' equals "local", tests run on the current machine,
+ not on Grid. Here no capabilities or hub URLs are required.
+
+ Based on the browser name received:
+ - If browser = "chrome" → a normal ChromeDriver object is created locally.
+ - If browser = "edge"   → an EdgeDriver object is created locally.
+ - If browser name is invalid → execution stops and prints a message.
+
+ In summary:
+ - Remote mode: used for Selenium Grid environment, supports distributed execution.
+ - Local mode : used for running tests directly on the current machine.
+
+ This structure allows the same codebase to run tests locally or remotely
+ simply by changing values in property file without touching the core logic.
+*/

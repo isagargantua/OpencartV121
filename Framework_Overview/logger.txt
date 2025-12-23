@@ -1,0 +1,91 @@
+/*
+===================== LOGGER (log4j2) IN SELENIUM FRAMEWORK =====================
+
+WHAT IS LOGGER?
+---------------
+Logger is a tool used to print meaningful execution messages during test run.
+Instead of using System.out.println everywhere, we use logger because:
+
+1) It gives different message levels (info, debug, warn, error, fatal).
+2) Log messages are saved in console + log files.
+3) Helps in debugging if a test fails.
+4) Gives professional reporting.
+5) Makes test history traceable.
+
+WHAT IS LOG4J2?
+---------------
+Log4j2 is an industry standard logging library by Apache which simplifies logging.
+It works with a single configuration file (log4j2.xml).
+
+WHY LOGGER IN FRAMEWORK?
+------------------------
+In Selenium automation, test execution can be very long and complicated.
+Logger is used for:
+
+- printing test start and end information
+- printing which browser is started
+- printing which URL we opened
+- printing test steps (click, type, verify)
+- printing failures and exceptions
+
+HOW TO CREATE LOGGER OBJECT?
+----------------------------
+// logger = LogManager.getLogger(this.getClass());
+
+Here:
+this.getClass() = prints class name dynamically (ex: BaseClass, TC001 etc.)
+so each test file will have separate log identity.
+
+EXAMPLE USAGE:
+--------------
+
+// logger.info("Opening Browser");
+// logger.info("Entering URL");
+// logger.error("Element not found");
+// logger.warn("Test step skipped");
+
+WHY LOGGER OVER SYSOUT?
+-----------------------
+
+System.out.println()              |            Logger
+---------------------------------------------------------------
+Not saved in file                 | Logs saved in .log file
+No color/level control            | info, debug, warn, error reports
+Hard to disable                   | Can disable by config file
+Unprofessional                    | Industry standard
+
+HOW LOG4J2 WORKS (very simple):
+-------------------------------
+1) Create log4j2.xml file.
+2) Define file path where logs will be stored.
+3) Use logger in test scripts.
+4) When test runs → logs automatically generate.
+
+EXAMPLE WORKFLOW:
+-----------------
+@Test:
+logger.info("Test Started");
+perform actions...
+logger.info("User registered successfully");
+
+If element fails:
+logger.error("Submit button not found");
+
+OUTPUT WE GET (console/log file):
+---------------------------------
+INFO  Browser Started
+INFO  Navigated to Homepage
+INFO  Entered Username
+ERROR Submit button not found
+
+This helps understand what exactly happened at each step.
+
+BENEFITS FOR TESTING TEAM:
+--------------------------
+- easy debugging
+- error investigation without rerun
+- improves reporting quality
+- tracks test progress in real time
+
+================================================================================
+*/

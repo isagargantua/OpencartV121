@@ -1,0 +1,38 @@
+/*
+------------------------- EXTENT REPORT + LISTENER NOTES -------------------------
+
+► Our ExtentReportManager class is attached to TestNG as a Listener.
+  This listener captures every Test Case event (Pass / Fail / Skip) 
+  and sends results directly to the Extent HTML report.
+
+► How the flow works:
+    1) When execution starts → a new HTML report is created.
+    2) On every test success → test name is added in report as PASS.
+    3) On failure → test name + failure reason + screenshot are added automatically.
+    4) At the end of execution → report opens automatically.
+
+► To run with Extent reporting:
+   - Open any TestNG XML file and make sure <listeners> section refers 
+     to the ExtentReportManager class.
+
+► Important checks to understand behaviour:
+   1) Try failing one test intentionally (for example by giving wrong 
+      password from config.properties). 
+      You will see:
+         - Test marked as FAILED
+         - Screenshot attached in report
+         - Exception message shown under that test.
+
+   2) For failed test re-execution:
+      After execution, open:
+         test-output → testng-failed.xml
+      This file contains only failed tests (TestNG feature).
+      Run this file to re-execute failed test cases only.
+
+► Key Outputs:
+   - Complete HTML report with pass/fail details → in /reports folder.
+   - Failed test screenshots → inside /screenshots folder.
+
+This helps in debugging and detailed reporting for hybrid automation framework.
+-------------------------------------------------------------------------------
+*/
